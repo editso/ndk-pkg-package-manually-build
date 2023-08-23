@@ -89,7 +89,9 @@ jobs:
       - run: ndk-pkg update
       - run: |
           ls ~/.ndk-pkg/repos.d/offical-core/formula && \
-          echo "\ndopatch: cat lib/puny_decode.c && sed 's/#ifdef HAVE_SYMVER_ALIAS_SUPPORT/#if 0/g' -i lib/puny_decode.c && sed 's/#ifdef HAVE_SYMVER_ALIAS_SUPPORT/#if 0/g' -i lib/puny_encode.c" >> ~/.ndk-pkg/repos.d/offical-core/formula/libidn2.yml
+          echo "\ndopatch: cat lib/puny_decode.c && sed 's/#ifdef HAVE_SYMVER_ALIAS_SUPPORT/#if 0/g' -i lib/puny_decode.c && sed 's/#ifdef HAVE_SYMVER_ALIAS_SUPPORT/#if 0/g' -i lib/puny_encode.c" >> ~/.ndk-pkg/repos.d/offical-core/formula/libidn2.yml && \
+          cp ~/.ndk-pkg/repos.d/offical-core/formula/1/elfutils.yml ~/.ndk-pkg/repos.d/offical-core/formula && \
+          cat ~/.ndk-pkg/repos.d/offical-core/formula/1/elfutils.yml
       - run: ndk-pkg install ${{ github.event.inputs.package-name }}:android-${{ github.event.inputs.target-api }}:${{ github.event.inputs.target-abis }} --build-type=${{ github.event.inputs.build-type }} --link-type=${{ github.event.inputs.link-type }} ${{ github.event.inputs.log-level }}
       - name: pack
         run: |
